@@ -37,9 +37,9 @@ event_templates('nethserver-don-update', qw(
 # nethserver-don-{start,stop} events
 #
 event_actions('nethserver-don-start', qw(
-    nethserver-don-start-sshd 20
+    nethserver-don-start 20
 ));
 event_actions('nethserver-don-stop', qw(
-    nethserver-don-stop-sshd 20
+    nethserver-don-stop 20
 ));
 
