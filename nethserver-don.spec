@@ -5,10 +5,10 @@ Summary: Don is the client for Windmill remote support system
 
 License: GPLv3
 URL: https://github.com/nethesis/windmill
-Source0: https://github.com/nethesis/windmill/archive/master.tar.gz
+Source: %{name}-%{version}.tar.gz
 
-BuildRequires:
-Requires: openvpn, openssh-server
+BuildRequires: nethserver-devtools
+Requires: openvpn, openssh-server, don
 
 %description
 Don is the client for Windmill remote support system.
@@ -19,18 +19,19 @@ It established a OpenVPN tunnel and open an ad-hoc OpenSSH server instance
 
 
 %build
-%configure
-#make %{?_smp_mflags}
+%{makedocs}
+perl createlinks
 
 
 %install
-%make_install
+rm -rf %{buildroot}
+(cd root   ; find . -depth -print | cpio -dump %{buildroot})
+%{genfilelist} %{buildroot} > e-smith-%{version}-filelist
 
 
-%files
-%doc
-
-
+%files -f e-smith-%{version}-filelist
+%defattr(-,root,root)
+%dir %{_nseventsdir}/%{name}-update
 
 %changelog
 
