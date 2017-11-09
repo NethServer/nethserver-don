@@ -1,0 +1,21 @@
+dev tunDON
+client
+remote {{$don{'ServerName'}}}
+tls-client
+{
+   my $cn = $don{'ServerCertificateCn'} || '';
+   if ( $cn ne '' ) {
+       $OUT .= "verify-x509-name \"$cn\"\n";
+   }
+}
+port 1194
+float
+auth-user-pass /run/don/credentials
+ca {{ $don{'ServerCa'} ? $don{'ServerCa'} : "/usr/share/don/ca.pem" }}
+auth-nocache
+compress lz4
+explicit-exit-notify 1
+verb 3
+persist-key
+persist-tun
+nobind

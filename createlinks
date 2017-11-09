@@ -28,6 +28,10 @@ event_actions('nethserver-don-update', qw(
     initialize-default-databases        00
 ));
 
+event_templates('nethserver-don-update', qw(
+    /usr/share/don/authorized_keys
+    /usr/share/don/don.ovpn
+));
 
 #
 # nethserver-don-{start,stop} events
