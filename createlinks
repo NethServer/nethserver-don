@@ -30,12 +30,12 @@ event_actions('nethserver-don-update', qw(
 
 
 #
-# don-{start,stop} events
+# nethserver-don-{start,stop} events
 #
-event_actions('don-start', qw(
-    nethserver-don-start 20
+event_actions('nethserver-don-start', qw(
+    nethserver-don-start-sshd 20
 ));
-event_actions('don-stop', qw(
-    nethserver-don-stop 20
+event_actions('nethserver-don-stop', qw(
+    nethserver-don-stop-sshd 20
 ));
 
