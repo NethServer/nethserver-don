@@ -19,3 +19,4 @@ verb 3
 persist-key
 persist-tun
 nobind
+management /run/don/management unix
