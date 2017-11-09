@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
  * Copyright (C) 2017 Nethesis S.r.l.
@@ -19,39 +19,33 @@
  * You should have received a copy of the GNU General Public License
  * along with NethServer.  If not, see COPYING.
  */
- 
-namespace NethServer\Module\NethSos;
-use Nethgui\System\PlatformInterface as Validate;
 
-class Start extends \Nethgui\Controller\AbstractController 
+namespace NethServer\Module;
+
+class Don extends \Nethgui\Controller\CompositeController
 {
+    protected function initializeAttributes(\Nethgui\Module\ModuleAttributesInterface $base)
+    {
+        return \Nethgui\Module\SimpleModuleAttributesProvider::extendModuleAttributes($base, 'Management', 0);
+    }
     public function initialize()
     {
         parent::initialize();
-        $this->declareParameter('SessionDuration', $this->createValidator()->greatThan(0)->lessThan(32));
-    }
-    public function process()
-    {
-        if($this->getRequest()->isMutation()) {
-            $this->getPlatform()->signalEvent('nethsos-start &', array($this->parameters['SessionDuration']));
+        if(file_exists('/run/don/credentials')) {
+            $this->addChild(new Don\Stop());
+            $this->addChild(new Don\Start());
+        } else {
+            $this->addChild(new Don\Start());
+            $this->addChild(new Don\Stop());
         }
-        parent::process();
     }
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
-        if( ! $view['SessionDuration']) {
-            $view['SessionDuration'] = '7';
+        $isRegistered = $this->getPlatform()->getDatabase('configuration')->getProp('nethupdate', 'SystemID');
+        if( ! $isRegistered && ! file_exists('/run/don/credentials')) {
+            header('Location: ' . $view->getModuleUrl('/Register'));
+            exit(0);
         }
-        if($this->getRequest()->isValidated()) {
-             $view->getCommandList()->show();
-        }
-    }
-    public function nextPath()
-    {
-        if($this->getRequest()->isMutation()) {
-            return 'Stop';
-        }
-        return FALSE;
     }
 }

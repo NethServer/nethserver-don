@@ -1,6 +1,6 @@
 <?php
 
-echo $view->header()->setAttribute('template',$T('NethSos_Start_header'));
+echo $view->header()->setAttribute('template',$T('Don_Start_header'));
 
 // echo $view->slider('SessionDuration')->setAttribute('min', 1)->setAttribute('max', 31);
 

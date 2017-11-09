@@ -1,6 +1,6 @@
 <?php
 
-echo $view->header()->setAttribute('template',$T('NethSos_Stop_header'));
+echo $view->header()->setAttribute('template',$T('Don_Stop_header'));
 
 $SessionId = $view->getUniqueId('SessionId');
 
@@ -22,7 +22,7 @@ echo $view->buttonList()
 ;
 
 $view->includeCss("
-#NethSos_Stop .TextInput {
+#Don_Stop .TextInput {
     width: 30em;
 }
 

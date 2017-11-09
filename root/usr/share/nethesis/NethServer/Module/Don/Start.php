@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
  * Copyright (C) 2017 Nethesis S.r.l.
@@ -19,35 +19,30 @@
  * You should have received a copy of the GNU General Public License
  * along with NethServer.  If not, see COPYING.
  */
- 
-namespace NethServer\Module\NethSos;
+
+namespace NethServer\Module\Don;
 use Nethgui\System\PlatformInterface as Validate;
 
-class Stop extends \Nethgui\Controller\AbstractController 
+class Start extends \Nethgui\Controller\AbstractController
 {
     public function initialize()
     {
-        $self = $this;
-        $sessionIdAdapter = $this->getPlatform()->getMapAdapter(function()use($self){
-            $contents = file('/run/nethsos/credentials');
-            return trim($contents[1]);
-        });
         parent::initialize();
-        $this->declareParameter('ServerId', FALSE, array('configuration', 'nethupdate', 'SystemID'));
-        $this->declareParameter('SessionId', FALSE, $sessionIdAdapter);
-        $this->declareParameter('SessionExpire', FALSE);
+        $this->declareParameter('SessionDuration', $this->createValidator()->greatThan(0)->lessThan(32));
     }
-    
     public function process()
     {
         if($this->getRequest()->isMutation()) {
-            $this->getPlatform()->signalEvent('nethsos-stop &');
+            $this->getPlatform()->signalEvent('nethserver-don-start &', array($this->parameters['SessionDuration']));
         }
         parent::process();
     }
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
+        if( ! $view['SessionDuration']) {
+            $view['SessionDuration'] = '7';
+        }
         if($this->getRequest()->isValidated()) {
              $view->getCommandList()->show();
         }
@@ -55,7 +50,7 @@ class Stop extends \Nethgui\Controller\AbstractController
     public function nextPath()
     {
         if($this->getRequest()->isMutation()) {
-            return 'Start';
+            return 'Stop';
         }
         return FALSE;
     }
