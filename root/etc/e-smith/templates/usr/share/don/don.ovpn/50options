@@ -5,4 +5,4 @@ auth-nocache
 compress lz4
 verb 3
 persist-key
-
+management /run/don/management unix
