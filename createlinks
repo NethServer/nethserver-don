@@ -29,7 +29,6 @@ event_actions('nethserver-don-update', qw(
 ));
 
 event_templates('nethserver-don-update', qw(
-    /usr/share/don/authorized_keys
     /usr/share/don/don.ovpn
 ));
 
