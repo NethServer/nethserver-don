@@ -1,0 +1,5 @@
+#
+# 20device
+#
+dev tunDON
+persist-tun

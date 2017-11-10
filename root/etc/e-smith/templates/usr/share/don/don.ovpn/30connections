@@ -1,0 +1,31 @@
+#
+# 30connections
+#
+
+# UPD connection
+<connection>
+explicit-exit-notify 1
+remote {{$don{'ServerName'}}} 1194 udp
+</connection>
+
+{
+    our $proxy_host = $proxy{'host'} || '';
+    our $proxy_port = $proxy{'port'} || '';
+    our $proxy_user = $proxy{'user'} || '';
+    our $proxy_password = $proxy{'password'} || '';
+    our $proxy = '';
+    our $auth = '';
+
+    if ($proxy_host ne '') {
+        if ($proxy_user ne '') {
+            $auth = "basic";
+            $OUT .= "<http-proxy-user-pass>\n$proxy_user\n$proxy_password\n</http-proxy-user-pass>\n";
+        }
+        $proxy = "http-proxy $proxy_host $proxy_port $auth\n";
+    }
+    ''; 
+}
+<connection>
+remote {{$don{'ServerName'}}} 443 tcp
+{{$proxy}}
+</connection>
