@@ -33,15 +33,14 @@ class Stop extends \Nethgui\Controller\AbstractController
             return trim($contents[1]);
         });
         parent::initialize();
-        $this->declareParameter('ServerId', FALSE, array('configuration', 'nethupdate', 'SystemID'));
+        $this->declareParameter('SystemId', FALSE, array('configuration', 'don', 'SystemId'));
         $this->declareParameter('SessionId', FALSE, $sessionIdAdapter);
-        $this->declareParameter('SessionExpire', FALSE);
     }
 
     public function process()
     {
         if($this->getRequest()->isMutation()) {
-            $this->getPlatform()->signalEvent('nethserver-don-stop &');
+            $this->getPlatform()->signalEvent('nethserver-don-stop');
         }
         parent::process();
     }

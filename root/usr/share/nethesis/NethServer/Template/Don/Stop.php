@@ -1,25 +1,32 @@
 <?php
 
-echo $view->header()->setAttribute('template',$T('Don_Stop_header'));
 
 $SessionId = $view->getUniqueId('SessionId');
 
-echo $view->textInput('ServerId', $view::STATE_DISABLED | $view::STATE_READONLY);
+if ( $view['SystemId'] ) {
+    echo $view->header()->setAttribute('template',$T('Don_Stop_header'));
 
-$labelOpenTag = "<label for='$SessionId'>";
+    echo $view->textInput('SystemId', $view::STATE_DISABLED | $view::STATE_READONLY);
 
-$help = '<div class="dcalert notification bg-yellow">
-  <p>' . $labelOpenTag . '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ' . htmlspecialchars($T('SessionHelp_label')) . '</label></p>
-</div>';
+    $labelOpenTag = "<label for='$SessionId'>";
 
-//echo $view->textInput('SessionExpire', $view::STATE_DISABLED | $view::STATE_READONLY);
-echo $view->textInput('SessionId', $view::STATE_DISABLED | $view::STATE_READONLY);
-echo $help;
+    $help = '<div class="dcalert notification bg-yellow">
+      <p>' . $labelOpenTag . '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ' . htmlspecialchars($T('SessionHelp_label')) . '</label></p>
+    </div>';
 
-echo $view->buttonList()
-    ->insert($view->button('Stop', $view::BUTTON_SUBMIT))
-    ->insert($view->button('Help', $view::BUTTON_HELP))
-;
+    echo $view->textInput('SessionId', $view::STATE_DISABLED | $view::STATE_READONLY);
+    echo $help;
+
+    echo $view->buttonList()
+        ->insert($view->button('Stop', $view::BUTTON_SUBMIT))
+        ->insert($view->button('Help', $view::BUTTON_HELP))
+    ;
+} else {
+    echo $view->header()->setAttribute('template',$T('Don_noconfig_header'));
+    echo '<div class="notification bg-yellow noconfig"><p>'.$T('Noconfig_label').'</p>'.
+         '<p><a href="https://github.com/NethServer/nethserver-don/blob/master/README.md">'.$T('Manual_label').'</a></p></div>';
+
+}
 
 $view->includeCss("
 #Don_Stop .TextInput {
@@ -50,6 +57,10 @@ $view->includeCss("
 .notification.bg-yellow {color: #000; background-color: #FFB600; border-color: #FFB600 }
 .notification.bg-yellow a {color: #000}
 
+.noconfig {
+  padding: 10px;
+  margin: 10px;
+}
 
 .dcalert ul {
     list-style-type: disc;

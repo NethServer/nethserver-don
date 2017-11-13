@@ -33,16 +33,21 @@ class Start extends \Nethgui\Controller\AbstractController
     public function process()
     {
         if($this->getRequest()->isMutation()) {
-            $this->getPlatform()->signalEvent('nethserver-don-start &', array($this->parameters['SessionDuration']));
+            $status = $this->getPlatform()->exec('/usr/bin/don status')->getExitCode();
+
+            if ($status != 6 && $status != 0) { // a problem occured
+                $this->getPlatform()->signalEvent('nethserver-don-stop');
+            }
+
+            $this->getPlatform()->signalEvent('nethserver-don-start');
         }
         parent::process();
     }
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
-        if( ! $view['SessionDuration']) {
-            $view['SessionDuration'] = '7';
-        }
+        $systemid = $this->getPlatform()->getDatabase('configuration')->getProp('don', 'SystemId');
+        $view['SystemId'] = $systemid;
         if($this->getRequest()->isValidated()) {
              $view->getCommandList()->show();
         }
@@ -50,7 +55,12 @@ class Start extends \Nethgui\Controller\AbstractController
     public function nextPath()
     {
         if($this->getRequest()->isMutation()) {
-            return 'Stop';
+            $status = $this->getPlatform()->exec('/usr/bin/don status')->getExitCode();
+            if ($status == 0) {
+                return 'Stop';
+            } else {
+                return 'Start';
+            }
         }
         return FALSE;
     }

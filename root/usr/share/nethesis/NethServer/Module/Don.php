@@ -31,21 +31,22 @@ class Don extends \Nethgui\Controller\CompositeController
     public function initialize()
     {
         parent::initialize();
-        if(file_exists('/run/don/credentials')) {
+        $status = $this->getPlatform()->exec('/usr/bin/don status')->getExitCode();
+
+        if ($status == 6) { // not running
+            $this->addChild(new Don\Start());
+            $this->addChild(new Don\Stop());
+        } else if( $status == 0) { // everything ok
             $this->addChild(new Don\Stop());
             $this->addChild(new Don\Start());
         } else {
             $this->addChild(new Don\Start());
-            $this->addChild(new Don\Stop());
         }
     }
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
-        $isRegistered = $this->getPlatform()->getDatabase('configuration')->getProp('nethupdate', 'SystemID');
-        if( ! $isRegistered && ! file_exists('/run/don/credentials')) {
-            header('Location: ' . $view->getModuleUrl('/Register'));
-            exit(0);
-        }
+        $systemid = $this->getPlatform()->getDatabase('configuration')->getProp('don', 'SystemId');
+        $view['SystemId'] = $systemid;
     }
 }
