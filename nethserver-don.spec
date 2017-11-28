@@ -2,6 +2,7 @@ Name: nethserver-don
 Version: 0.0.1
 Release: 1%{?dist}
 Summary: Don is the client for Windmill remote support system
+BuildArch: noarch
 
 License: GPLv3
 URL: https://github.com/nethesis/windmill
