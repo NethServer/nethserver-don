@@ -47,7 +47,9 @@ class Start extends \Nethgui\Controller\AbstractController
     {
         parent::prepareView($view);
         $systemid = $this->getPlatform()->getDatabase('configuration')->getProp('don', 'SystemId');
+        $server = $this->getPlatform()->getDatabase('configuration')->getProp('don', 'ServerName');
         $view['SystemId'] = $systemid;
+        $view['ServerName'] = $server;
         if($this->getRequest()->isValidated()) {
              $view->getCommandList()->show();
         }

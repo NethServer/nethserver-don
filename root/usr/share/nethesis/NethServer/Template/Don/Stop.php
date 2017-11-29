@@ -5,8 +5,10 @@ $SessionId = $view->getUniqueId('SessionId');
 
 if ( $view['SystemId'] ) {
     echo $view->header()->setAttribute('template',$T('Don_Stop_header'));
+    
+    echo '<div class="notification don_description"><p>'.$T('Stop_description').'</p></div>';
 
-    echo $view->textInput('SystemId', $view::STATE_DISABLED | $view::STATE_READONLY);
+    echo $view->textInput('IpAddr', $view::STATE_DISABLED | $view::STATE_READONLY);
 
     $labelOpenTag = "<label for='$SessionId'>";
 
@@ -65,6 +67,24 @@ $view->includeCss("
 .dcalert ul {
     list-style-type: disc;
     margin-left: 25px;
+}
+
+div.don_spacer {
+    height: 10px;
+}
+
+div.don_description {
+    background-color: #eee;
+    border-color: #eee;
+    margin: 10px;
+    padding: 10px;
+    width: 50%;
+}
+
+span.don_label {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: larger;
 }
 
 ");

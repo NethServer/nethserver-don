@@ -51,8 +51,10 @@ class Stop extends \Nethgui\Controller\AbstractController
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
+        $ipaddr = $this->getPlatform()->exec("/sbin/ip -o -4 address show tunDON primary | head -1 | awk '{print \$4}' | cut -d '/' -f1")->getOutput();
+        $view['IpAddr'] = $ipaddr;
         if($this->getRequest()->isValidated()) {
-             $view->getCommandList()->show();
+            $view->getCommandList()->show();
         }
     }
     public function nextPath()
