@@ -1,5 +1,5 @@
 Name: nethserver-don
-Version: 0.0.1
+Version: 0.1.0
 Release: 1%{?dist}
 Summary: Don is the client for Windmill remote support system
 BuildArch: noarch
@@ -35,6 +35,9 @@ rm -rf %{buildroot}
 %dir %{_nseventsdir}/%{name}-update
 
 %changelog
+* Mon Dec 04 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.1.0-1
+- First nethserver-don stable release
+
 * Mon Nov 13 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.0.1-1
 - First beta release
 
