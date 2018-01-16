@@ -17,7 +17,7 @@ if ( $view['SystemId'] ) {
 } else {
     echo $view->header()->setAttribute('template',$T('Don_noconfig_header'));
     echo '<div class="notification bg-yellow noconfig"><p>'.$T('Noconfig_label').'</p>'.
-         '<p><a href="https://github.com/NethServer/nethserver-don/blob/master/README.md">'.$T('Manual_label').'</a></p></div>';
+         '<p><a href="https://github.com/NethServer/nethserver-don/">'.$T('Manual_label').'</a></p></div>';
 
 }
 
