@@ -8,7 +8,7 @@ if ( $view['SystemId'] ) {
     
     echo '<div class="notification don_description"><p>'.$T('Stop_description').'</p></div>';
 
-    echo $view->textInput('IpAddr', $view::STATE_DISABLED | $view::STATE_READONLY);
+    echo $view->textInput('IpAddr', $view::STATE_READONLY);
 
     $labelOpenTag = "<label for='$SessionId'>";
 
@@ -16,7 +16,7 @@ if ( $view['SystemId'] ) {
       <p>' . $labelOpenTag . '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ' . htmlspecialchars($T('SessionHelp_label')) . '</label></p>
     </div>';
 
-    echo $view->textInput('SessionId', $view::STATE_DISABLED | $view::STATE_READONLY);
+    echo $view->textInput('SessionId', $view::STATE_READONLY);
     echo $help;
 
     echo $view->buttonList()
