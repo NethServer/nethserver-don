@@ -1,5 +1,5 @@
 Name: nethserver-don
-Version: 0.1.0
+Version: 0.2.0
 Release: 1%{?dist}
 Summary: Don is the client for Windmill remote support system
 BuildArch: noarch
@@ -35,6 +35,10 @@ rm -rf %{buildroot}
 %dir %{_nseventsdir}/%{name}-update
 
 %changelog
+* Tue Jan 16 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.2.0-1
+- UI: fix copy&paste for FF 57 - nethserver-don#6
+- firewall: open port 981 if shorewall is stopped - nethserver-don#5
+
 * Mon Dec 04 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.1.0-1
 - First nethserver-don stable release
 
