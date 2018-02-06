@@ -37,8 +37,8 @@ class Stop extends \Nethgui\Controller\AbstractController
             }
         });
         parent::initialize();
-        $this->declareParameter('SystemId', FALSE, array('configuration', 'don', 'SystemId'));
-        $this->declareParameter('SessionId', FALSE, $sessionIdAdapter);
+        $this->declareParameter('SystemId', Validate::ANYTHING, array('configuration', 'don', 'SystemId'));
+        $this->declareParameter('SessionId', Validate::ANYTHING, $sessionIdAdapter);
     }
 
     public function process()
