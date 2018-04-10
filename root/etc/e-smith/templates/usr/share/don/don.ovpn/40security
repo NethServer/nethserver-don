@@ -2,12 +2,18 @@
 # 40security
 #
 tls-client
-auth-user-pass /run/don/credentials
 auth-nocache
 ca {{ $don{'ServerCa'} ? $don{'ServerCa'} : "/usr/share/don/ca.pem" }}
 {
    my $cn = $don{'ServerCertificateCn'} || '';
    if ( $cn ne '' ) {
        $OUT .= "verify-x509-name \"$cn\"\n";
+   }
+
+   my $version = $sysconfig{'Version'} || '';
+   if ($version =~ /^6/) {
+     $OUT .= "auth-user-pass /var/run/don/credentials\n";
+   } else {
+     $OUT .= "auth-user-pass /run/don/credentials\n";
    }
 }
