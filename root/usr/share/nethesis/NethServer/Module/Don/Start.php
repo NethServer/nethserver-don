@@ -57,7 +57,7 @@ class Start extends \Nethgui\Controller\AbstractController
     public function nextPath()
     {
         if($this->getRequest()->isMutation()) {
-            $status = $this->getPlatform()->exec('/usr/bin/don status')->getExitCode();
+            $status = $this->getPlatform()->exec('sudo /usr/bin/don status')->getExitCode();
             if ($status == 0) {
                 return 'Stop';
             } else {

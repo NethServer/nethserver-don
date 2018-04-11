@@ -31,7 +31,7 @@ class Don extends \Nethgui\Controller\CompositeController
     public function initialize()
     {
         parent::initialize();
-        $status = $this->getPlatform()->exec('/usr/bin/don status')->getExitCode();
+        $status = $this->getPlatform()->exec('sudo /usr/bin/don status')->getExitCode();
 
         if ($status == 6) { // not running
             $this->addChild(new Don\Start());

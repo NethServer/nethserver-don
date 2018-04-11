@@ -32,7 +32,9 @@ rm -rf %{buildroot}
 
 %files -f e-smith-%{version}-filelist
 %defattr(-,root,root)
+%if 0%{?ns7}
 %dir %{_nseventsdir}/%{name}-update
+%endif
 
 %changelog
 * Tue Feb 06 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.3.0-1
