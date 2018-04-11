@@ -29,8 +29,14 @@ class Stop extends \Nethgui\Controller\AbstractController
     {
         $self = $this;
         $sessionIdAdapter = $this->getPlatform()->getMapAdapter(function()use($self){
-            if (file_exists('/run/don/credentials')) {
-                $contents = file('/run/don/credentials');
+            $version = $self->getPlatform()->getDatabase('configuration')->getProp('sysconfig','Version');
+            if (strpos($version, "6") == 0) {
+                 $cred_file = '/var/run/don/credentials';
+            } else {
+                 $cred_file = '/run/don/credentials';
+            }
+            if (file_exists($cred_file)) {
+                $contents = file($cred_file);
                 return trim($contents[1]);
             } else {
                 return '';

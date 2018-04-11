@@ -5,4 +5,12 @@ auth-nocache
 compress lz4
 verb 3
 persist-key
-management /run/don/management unix
+{
+   my $version = $sysconfig{'Version'} || '';
+   if ($version =~ /^6/) {
+     $OUT .= "management /var/run/don/management unix\n";
+   } else {
+     $OUT .= "management /run/don/management unix\n";
+   }
+
+}
