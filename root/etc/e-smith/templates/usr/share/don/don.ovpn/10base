@@ -4,7 +4,6 @@
 client
 
 server-poll-timeout 5
-connect-timeout 10
 nobind
 float
 
