@@ -4,13 +4,13 @@
 auth-nocache
 verb 3
 persist-key
+compress lz4
 {
    my $version = $sysconfig{'Version'} || '';
    if ($version =~ /^6/) {
      $OUT .= "management /var/run/don/management unix\n";
    } else {
      $OUT .= "management /run/don/management unix\n";
-     $OUT .= "compress lz4\n";
      $OUT .= "connect-timeout 10\n";
    }
 
