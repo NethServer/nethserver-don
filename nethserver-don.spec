@@ -1,5 +1,5 @@
 Name: nethserver-don
-Version: 0.4.0
+Version: 0.5.0
 Release: 1%{?dist}
 Summary: Don is the client for Windmill remote support system
 BuildArch: noarch
@@ -35,6 +35,9 @@ rm -rf %{buildroot}
 %dir /etc/e-smith/events/%{name}-update
 
 %changelog
+* Thu May 17 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.5.0-1
+- Always enable lz4 compression: fix compatibility with NS 6
+
 * Mon Apr 16 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.4.0-1
 - Don: support NS 6 - NethServer/dev#5451
 
