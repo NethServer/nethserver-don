@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# Cleanup stale and unused shorewall status
+#
+rm -f /var/lib/shorewall/tunDON.status
+
+exit 0

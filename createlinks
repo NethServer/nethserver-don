@@ -26,6 +26,7 @@ use esmith::Build::CreateLinks qw(:all);
 
 event_actions('nethserver-don-update', qw(
     initialize-default-databases        00
+    nethserver-don-conf                 20
 ));
 
 event_templates('nethserver-don-update', qw(
