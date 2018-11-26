@@ -6,8 +6,6 @@ if ( $view['SystemId'] ) {
     
     echo '<div class="notification don_description noconfig"><p>'.$T('Start_description').'</p></div>';
 
-    echo "<div><span class='don_label'>".$T('SystemId_label').":</span>"; echo $view->textLabel('SystemId'); echo " </div>";
-    echo "<div class='don_spacer'></div>";
     echo "<div><span class='don_label'>".$T('ServerName_label').":</span>"; echo $view->textLabel('ServerName'); echo " </div>";
     echo "<div class='don_spacer'></div>";
     echo $view->buttonList()

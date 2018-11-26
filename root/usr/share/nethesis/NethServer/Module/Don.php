@@ -43,10 +43,4 @@ class Don extends \Nethgui\Controller\CompositeController
             $this->addChild(new Don\Start());
         }
     }
-    public function prepareView(\Nethgui\View\ViewInterface $view)
-    {
-        parent::prepareView($view);
-        $systemid = $this->getPlatform()->getDatabase('configuration')->getProp('don', 'SystemId');
-        $view['SystemId'] = $systemid;
-    }
 }
