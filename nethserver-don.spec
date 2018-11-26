@@ -1,5 +1,5 @@
 Name: nethserver-don
-Version: 0.5.1
+Version: 0.5.2
 Release: 1%{?dist}
 Summary: Don is the client for Windmill remote support system
 BuildArch: noarch
@@ -35,6 +35,9 @@ rm -rf %{buildroot}
 %dir /etc/e-smith/events/%{name}-update
 
 %changelog
+* Mon Nov 26 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.5.2-1
+- UI: hide server identifier - nethserver-don#10
+
 * Thu Aug 23 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.5.1-1
 - Remove tunDON from shorewall provider interfaces (cosmetic fix)
 
