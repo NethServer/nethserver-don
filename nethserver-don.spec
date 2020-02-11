@@ -33,6 +33,7 @@ rm -rf %{buildroot}
 %files -f e-smith-%{version}-filelist
 %defattr(-,root,root)
 %dir /etc/e-smith/events/%{name}-update
+%attr(0440,root,root) /etc/sudoers.d/20_nethserver_don
 
 %changelog
 * Wed Jan 16 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 0.5.3-1
